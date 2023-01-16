@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 
@@ -8,6 +9,13 @@ import (
 )
 
 func main() {
+	for _, arg := range os.Args {
+		if arg == "test" {
+			fmt.Println("test")
+			return
+		}
+	}
+
 	e := echo.New()
 
 	e.GET("/", func(c echo.Context) error {

@@ -9,5 +9,4 @@ COPY go.mod go.sum main.go ./
 RUN go mod download
 RUN go build main.go
 
-#CMD ["./main"]
-CMD ["ls"]
+ENTRYPOINT ["./main"]
