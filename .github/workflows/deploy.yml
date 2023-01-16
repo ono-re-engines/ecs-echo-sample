@@ -54,7 +54,7 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: .aws/task-definition-test.json
-          container-name: ${{ env.CONTAINER_NAME }}
+          container-name: test
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Fill in the new image ID in the Amazon ECS task definition
