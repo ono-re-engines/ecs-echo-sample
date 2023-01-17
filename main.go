@@ -13,15 +13,9 @@ import (
 func main() {
 	for _, arg := range os.Args {
 		if arg == "test" {
-			if err := sendMessage("sleep starting"); err != nil {
-				fmt.Println(err.Error())
-				os.Exit(1)
-			}
+			fmt.Printf("sleep starting at %s", time.Now().Format(time.RFC3339))
 			time.Sleep(time.Minute * 5)
-			if err := sendMessage("sleep ended"); err != nil {
-				fmt.Println(err.Error())
-				os.Exit(1)
-			}
+			fmt.Printf("sleep ended at %s", time.Now().Format(time.RFC3339))
 			return
 		}
 	}
