@@ -69,7 +69,8 @@ jobs:
         env:
           AWS_SUBNET_ID: subnet-0b50a46f7fc467c27
           AWS_SG_NAME: sg-06a5036aba6f9450d
-          NETWORK_CONFIG: "awsvpcConfiguration={subnets=[${SUBNET_ID}],securityGroups=[${SG_ID}],assignPublicIp=ENABLED}"
+          NETWORK_CONFIG: "awsvpcConfiguration={subnets=[${{ SUBNET_ID }}],securityGroups=[${{ SG_ID }}],assignPublicIp=ENABLED}"
+          TASK_DEF_ARN: ${{ steps.task-def-test.outputs.task-definition }}
         run: |
           aws ecs run-task \
           --cluster "${CLUSTER_NAME}" \
