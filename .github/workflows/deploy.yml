@@ -77,7 +77,7 @@ jobs:
           --output text)
           NETWORK_CONFIG="awsvpcConfiguration={subnets=[${SUBNET_ID}],securityGroups=[${SG_ID}],assignPublicIp=ENABLED}"
           aws ecs run-task \
-          --cluster "${CLUSTER_NAME}" \
+          --cluster "${ECS_CLUSTER}" \
           --task-definition "${TASK_DEF_ARN}" \
           --network-configuration "${NETWORK_CONFIG}" \
           --launch-type FARGATE
