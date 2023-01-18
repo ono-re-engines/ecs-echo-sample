@@ -76,10 +76,6 @@ jobs:
           --task-definition "${TASK_DEF_ARN}" \
           --network-configuration "${NETWORK_CONFIG}" \
           --launch-type FARGATE
-        with:
-          task-definition: ${{ steps.task-def-test.outputs.task-definition }}
-          cluster: ${{ env.ECS_CLUSTER }}
-          wait-for-service-stability: true
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
