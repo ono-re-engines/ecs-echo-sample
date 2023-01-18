@@ -69,13 +69,13 @@ jobs:
         env:
           AWS_SUBNET_ID: subnet-0b50a46f7fc467c27
           AWS_SG_NAME: sg-06a5036aba6f9450d
-          FAMILY_NAME: test
+          ECS_FAMILY_NAME: test
         run: |
           TASK_DEF_ARN=$(aws ecs list-task-definitions \
-          --family-prefix "${FAMILY_NAME}" \
+          --family-prefix "${ECS_FAMILY_NAME}" \
           --query "reverse(taskDefinitionArns)[0]" \
           --output text)
-          NETWORK_CONFIG="awsvpcConfiguration={subnets=[${SUBNET_ID}],securityGroups=[${SG_ID}],assignPublicIp=ENABLED}"
+          NETWORK_CONFIG="awsvpcConfiguration={subnets=[${AWS_SUBNET_ID}],securityGroups=[${AWS_SG_NAME}],assignPublicIp=ENABLED}"
           aws ecs run-task \
           --cluster "${ECS_CLUSTER}" \
           --task-definition "${TASK_DEF_ARN}" \
