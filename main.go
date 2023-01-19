@@ -28,10 +28,10 @@ func main() {
 		}
 		return c.String(http.StatusOK, msg)
 	})
-	e.GET("/api/:message", func(c echo.Context) error {
-		msg := c.Param("id")
+	e.GET("/api/test", func(c echo.Context) error {
+		msg := os.Getenv("MESSAGE")
 		if msg == "" {
-			msg = "Param not found."
+			msg = "Env not found."
 		}
 		return c.String(http.StatusOK, msg)
 	})
