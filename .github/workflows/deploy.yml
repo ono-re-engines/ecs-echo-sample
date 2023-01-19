@@ -65,6 +65,9 @@ jobs:
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
 
+      - name: Register task definition
+        run: aws ecs register-task-definition --cli-input-json "fileb://${steps.task-def-test.outputs.task-definition}"
+
       - name: Run Amazon ECS task(test)
         env:
           AWS_SUBNET_ID: subnet-0b50a46f7fc467c27
