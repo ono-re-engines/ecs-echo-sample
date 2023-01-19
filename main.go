@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"net/http"
 	"os"
@@ -29,28 +28,13 @@ func main() {
 		}
 		return c.String(http.StatusOK, msg)
 	})
+	e.GET("/api/:message", func(c echo.Context) error {
+		msg := c.Param("id")
+		if msg == "" {
+			msg = "Param not found."
+		}
+		return c.String(http.StatusOK, msg)
+	})
 
 	e.Logger.Fatal(e.Start(":80"))
-}
-
-func sendMessage(msg string) error {
-	jsonStr := fmt.Sprintf(`{"text":"%s"}`, msg)
-	req, err := http.NewRequest(
-		http.MethodPost,
-		"https://hooks.slack.com/services/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",
-		bytes.NewBuffer([]byte(jsonStr)),
-	)
-	if err != nil {
-		return err
-	}
-
-	req.Header.Set("Content-Type", "application/json")
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		return err
-	}
-	_ = resp.Body.Close()
-
-	return nil
 }
